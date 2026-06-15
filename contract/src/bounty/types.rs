@@ -1,5 +1,15 @@
 use soroban_sdk::{contracttype, Address, String};
 
+#[contracttype]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum BountyCategory {
+    Development = 0,
+    Design = 1,
+    Documentation = 2,
+    Research = 3,
+    Other = 4,
+}
+
 /// Status of a bounty lifecycle
 #[contracttype]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -36,6 +46,7 @@ pub struct Bounty {
     pub token: Address,
     /// Current status of the bounty
     pub status: BountyStatus,
+    pub category: BountyCategory,
     /// Address of the contributor who claimed the bounty (optional)
     pub claimer: Option<Address>,
     /// Submission URL when work is submitted
