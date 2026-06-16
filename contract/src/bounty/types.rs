@@ -1,5 +1,16 @@
 use soroban_sdk::{contracttype, Address, String};
 
+/// Category of the bounty for machine-readability
+#[contracttype]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum BountyCategory {
+    Development = 0,
+    Design = 1,
+    Documentation = 2,
+    Research = 3,
+    Other = 4,
+}
+
 /// Status of a bounty lifecycle
 #[contracttype]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -42,8 +53,8 @@ pub struct Bounty {
     pub submission_url: Option<String>,
     /// Creation timestamp (seconds)
     pub created_at: u64,
-    /// Expiration timestamp (seconds)
     pub expires_at: u64,
+    pub category: BountyCategory,
 }
 
 /// Represents the state of funds locked in escrow for a bounty
